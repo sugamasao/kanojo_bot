@@ -76,12 +76,10 @@ class KanojoBot
     @twitter.stream.userstream do |status|
       next if @twitter.exclude_tweet?(status)
 
-      samisii = samisisou(status.text)
-
       daisukidayo = create_message(status)
       next if daisukidayo.nil?
-      @logger.info("tweeted: #{daisukidayo}")
 
+      @logger.info("tweeted: #{daisukidayo}")
       @twitter.tweet_update(daisukidayo, status.id)
     end
   end
