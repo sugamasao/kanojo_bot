@@ -74,6 +74,7 @@ class KanojoBot
   def run
     @logger.debug 'run!'
     @twitter.stream.userstream do |status|
+      @logger.debug(status)
       next if @twitter.exclude_tweet?(status)
 
       daisukidayo = create_message(status)
