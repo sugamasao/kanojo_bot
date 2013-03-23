@@ -68,7 +68,7 @@ class KanojoBot
     @logger = Logger.new(STDOUT)
 
     @twitter = TwitterWrapper.new(@logger)
-    date = Time.now.strftime('%Yがつ%mにち%d %Hじ%Mふん%Sびょう')
+    date = Time.now.strftime('%Yねん%mがつ%dにち %Hじ%Mふん%Sびょう')
     @twitter.tweet_update("#{date} きょう も すぎゃーん だいすき")
   end
 
