@@ -10,10 +10,10 @@ class TwitterWrapper
   def initialize(logger)
     @logger = logger
     @client = Twitter::Client.new(
-      :consumer_key       => ENV['TWITTER_CONSUMER_KEY'],
-      :consumer_secret    => ENV['TWITTER_CONSUMER_SECRET'],
-      :oauth_token        => ENV['TWITTER_ACCESS_TOKEN'],
-      :oauth_token_secret => ENV['TWITTER_ACCESS_TOKEN_SECRET'],
+      consumer_key:       ENV['TWITTER_CONSUMER_KEY'],
+      consumer_secret:    ENV['TWITTER_CONSUMER_SECRET'],
+      oauth_token:        ENV['TWITTER_ACCESS_TOKEN'],
+      oauth_token_secret: ENV['TWITTER_ACCESS_TOKEN_SECRET'],
     )
     @profile = @client.verify_credentials
 
@@ -46,10 +46,10 @@ class TwitterWrapper
   # tweet update! say daisuki
   # @param [String] daisukidayo daisuki message 
   # @param [Fixnum] id reply user id
-  def tweet_update(daisukidayo, id)
-    @client.update(daisukidayo, {
-      in_reply_to_status_id: id
-    })
+  def tweet_update(daisukidayo, id = nil)
+    option = {}
+    option[:in_reply_to_status_id] = id if id
+    @client.update(daisukidayo, option)
   end
 
   # exclude tweet
@@ -68,6 +68,8 @@ class KanojoBot
     @logger = Logger.new(STDOUT)
 
     @twitter = TwitterWrapper.new(@logger)
+    date = Time.now.strftime('%Yがつ%mにち%d %Hじ%Mふん%Sびょう')
+    @twitter.tweet_update("#{date} きょう も すぎゃーん だいすき")
   end
 
   # running kanojo!
