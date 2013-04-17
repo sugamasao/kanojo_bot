@@ -69,7 +69,7 @@ class KanojoBot
 
     @twitter = TwitterWrapper.new(@logger)
     date = Time.now.strftime('%Yねん%mがつ%dにち %Hじ%Mふん%Sびょう')
-    @twitter.tweet_update("#{date} きょう も すぎゃーん だいすき")
+    @twitter.tweet_update("#{date} きょうも すぎゃーん だいすき #{face}")
   end
 
   # running kanojo!
@@ -100,7 +100,7 @@ class KanojoBot
     samisii = samisisou(status.text)
     return nil if samisii.nil?
 
-    "@#{status.from_user} #{samisii}#{hagemashitai}"
+    "@#{status.from_user} #{samisii}#{hagemashitai} #{face}"
   end
 
   # samisisou ?
@@ -128,6 +128,29 @@ class KanojoBot
 
   def hagemashitai
     %w(だいすきだよ！ えへへ〜/// ずっといっしょにいようね！).sample
+  end
+
+  # https://github.com/sugamasao/kanojo_bot/issues/2
+  def face
+    face_list =<<EOS
+( ❝̆ ·̫̮ ❝̆ )✧
+( ¤̴̶̷̤́ ‧̫̮ ¤̴̶̷̤̀ )
+(◞≼●≽◟◞౪◟◞≼●≽◟)
+┌（┌ ＾o＾）┐スギャ...
+(◞≼⓪≽◟,_ゝ◞≼⓪≽◟)ﾏﾝﾀﾞﾑ
+╰U╯☜(◉ɷ◉ )
+(｡◠‿◠｡✿)
+ヾ(ﾟωﾟ)ﾉ
+(ﾟωﾟ)
+(ﾟωﾟ:)
+✌:(´ཀ`✌ ∠):
+(╯⊙ ⊱ ⊙╰ )
+(#`)3′)▂▂▂▃▄▅ ブオオオオオオ
+٩(๑❛ᴗ❛๑)۶
+ƪ(•̃͡ε•̃͡)∫ʃ
+(✘﹏✘ა)
+EOS
+    face_list.split("\n").sample
   end
 end
 
