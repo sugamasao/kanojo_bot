@@ -1,7 +1,11 @@
 # encoding: utf-8
 
+require 'pathname'
+require 'yaml'
 require 'logger'
 require 'tweetstream'
+
+DATA_DIR = Pathname.new(__FILE__).dirname.join('data')
 
 class TwitterWrapper
   attr_reader :client, :stream
@@ -65,9 +69,13 @@ end
 class KanojoBot
   def initialize
     STDOUT.sync = true
-    @logger = Logger.new(STDOUT)
 
-    @twitter = TwitterWrapper.new(@logger)
+    @logger       = Logger.new(STDOUT)
+    @face         = YAML.load(DATA_DIR.join('face.yaml').read)
+    @hagemashitai = YAML.load(DATA_DIR.join('hagemashitai.yaml').read)
+    @samishisou   = YAML.load(DATA_DIR.join('samishisou.yaml').read)
+    @twitter      = TwitterWrapper.new(@logger)
+
     date = Time.now.strftime('%Yねん%mがつ%dにち %Hじ%Mふん%Sびょう')
     @twitter.tweet_update("#{date} きょうも すぎゃーん だいすき #{face}")
   end
@@ -97,65 +105,32 @@ class KanojoBot
   # @return [String] reply string
   # @return [nil] not reply
   def create_message(status)
-    samisii = samisisou(status.text)
-    return nil if samisii.nil?
+    samishii = samishisou(status.text)
+    return nil if samishii.nil?
 
-    "@#{status.from_user} #{samisii}#{hagemashitai} #{face}"
+    "@#{status.from_user} #{samishii}#{hagemashitai} #{face}"
   end
 
-  # samisisou ?
+  # samishisou ?
   # @param [String] text tweet text.
   # @return [String] reply string
   # @return [nil] not reply
-  def samisisou(text)
-    case text
-    when /独/
-      '独りじゃないでしょ？'
-    when /彼女/
-      '呼んだ？'
-    when /非リア/, /非モテ/, /合コン/, /リア充/
-      'あたしがいるよ〜〜！'
-    when /バレンタイン/, /誕生日/, /クリスマス/
-      'ちゃんと覚えてるよ〜。'
-    when /全裸/
-      'たいへん。かぜひいちゃう！'
-    when /あーりん/
-      'あーりんにヤキモチなう。。。'
-    when /うっせー/
-      'ご機嫌斜めなのね、それでも好きだヨ'
-    when /ももクロ/, /結婚/, /アイドル/, /ジョジョ/, /未来/, /ドルヲタ/
-      '' # hagemashitaiの言葉だけ
+  def samishisou(text)
+    @samishisou.each do |match_word|
+      match_word["word"].each do |word|
+        return match_word["response"] if text =~ /#{word}/
+      end
     end
   end
 
   def hagemashitai
-    %w(だいすきだよ！ えへへ〜/// ずっといっしょにいようね！).sample
+    @hagemashitai.sample
   end
 
-  # https://github.com/sugamasao/kanojo_bot/issues/2
   def face
-    face_list =<<EOS
-( ❝̆ ·̫̮ ❝̆ )✧
-( ¤̴̶̷̤́ ‧̫̮ ¤̴̶̷̤̀ )
-(◞≼●≽◟◞౪◟◞≼●≽◟)
-┌（┌ ＾o＾）┐スギャ...
-(◞≼⓪≽◟,_ゝ◞≼⓪≽◟)ﾏﾝﾀﾞﾑ
-╰U╯☜(◉ɷ◉ )
-(｡◠‿◠｡✿)
-ヾ(ﾟωﾟ)ﾉ
-(ﾟωﾟ)
-(ﾟωﾟ:)
-✌:(´ཀ`✌ ∠):
-(╯⊙ ⊱ ⊙╰ )
-(#`)3′)▂▂▂▃▄▅ ブオオオオオオ
-٩(๑❛ᴗ❛๑)۶
-ƪ(•̃͡ε•̃͡)∫ʃ
-(✘﹏✘ა)
-EOS
-    face_list.split("\n").sample
+    @face.sample
   end
 end
-
 
 KanojoBot.daisuki
 
