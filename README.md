@@ -6,7 +6,7 @@ inspired by [genki-bot](https://github.com/sugyan/genki-bot)
 
 ----
 
-# how to use
+## how to use
 
 get access token.
 
@@ -24,4 +24,10 @@ execute KanojoBot.daisuki
 % bundle exec ruby kanojo_bot.rb
 ```
 
+## how to add word?
 
+editting for yaml.
+
+- [add match word and response variation](data/samishisou.yaml) （すぎゃーんの言葉に反応するリアクション）
+- [add end word variation](data/hagemashitai.yaml) （レスポンスの最後にランダムで追加する文字列）
+- [add face variation](data/face.yaml) （使用する顔文字）
