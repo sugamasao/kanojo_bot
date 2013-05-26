@@ -3,7 +3,6 @@
 require 'pathname'
 require 'yaml'
 
-
 class TextProcessor
 
   # data directory
