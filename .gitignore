@@ -1,0 +1,6 @@
+.DS_Store
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/

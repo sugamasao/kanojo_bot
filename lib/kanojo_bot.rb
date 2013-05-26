@@ -1,11 +1,9 @@
 # encoding: utf-8
 
-require 'pathname'
-require 'yaml'
 require 'logger'
 require 'tweetstream'
 
-DATA_DIR = Pathname.new(__FILE__).dirname.join('data')
+require_relative 'text_processor'
 
 class TwitterWrapper
   attr_reader :client, :stream
@@ -67,17 +65,15 @@ class TwitterWrapper
 end
 
 class KanojoBot
+
   def initialize
     STDOUT.sync = true
 
-    @logger       = Logger.new(STDOUT)
-    @face         = YAML.load(DATA_DIR.join('face.yaml').read)
-    @hagemashitai = YAML.load(DATA_DIR.join('hagemashitai.yaml').read)
-    @samishisou   = YAML.load(DATA_DIR.join('samishisou.yaml').read)
-    @twitter      = TwitterWrapper.new(@logger)
+    @logger    = Logger.new(STDOUT)
+    @twitter   = TwitterWrapper.new(@logger)
+    @processor = TextProcessor.new
 
-    date = Time.now.strftime('%Yねん%mがつ%dにち %Hじ%Mふん%Sびょう')
-    @twitter.tweet_update("#{date} きょうも すぎゃーん だいすき #{face}")
+    @twitter.tweet_update(@processor.wakeup_message(Time.now))
   end
 
   # running kanojo!
@@ -87,7 +83,8 @@ class KanojoBot
       @logger.debug(status)
       next if @twitter.exclude_tweet?(status)
 
-      daisukidayo = create_message(status)
+      daisukidayo = @processor.call_to_user(status.from_user, status.text)
+
       next if daisukidayo.nil?
 
       @logger.info("tweeted: #{daisukidayo}")
@@ -97,38 +94,6 @@ class KanojoBot
 
   def self.daisuki
     self.new.run
-  end
-
-  private
-
-  # create reply message 
-  # @return [String] reply string
-  # @return [nil] not reply
-  def create_message(status)
-    samishii = samishisou(status.text)
-    return nil if samishii.nil?
-
-    "@#{status.from_user} #{samishii}#{hagemashitai} #{face}"
-  end
-
-  # samishisou ?
-  # @param [String] text tweet text.
-  # @return [String] reply string
-  # @return [nil] not reply
-  def samishisou(text)
-    @samishisou.each do |match_word|
-      match_word["word"].each do |word|
-        return match_word["response"] if text =~ /#{word}/
-      end
-    end
-  end
-
-  def hagemashitai
-    @hagemashitai.sample
-  end
-
-  def face
-    @face.sample
   end
 end
 
