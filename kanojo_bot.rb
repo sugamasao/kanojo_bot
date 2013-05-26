@@ -132,5 +132,4 @@ class KanojoBot
   end
 end
 
-KanojoBot.daisuki
 

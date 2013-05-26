@@ -1,1 +1,1 @@
-bot: bundle exec ruby kanojo_bot.rb
+bot: bundle exec ruby bin/kanojo_bot
