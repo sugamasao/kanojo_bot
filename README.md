@@ -21,7 +21,7 @@ execute KanojoBot.daisuki
 
 ```sh
 % bundle install
-% bundle exec ruby kanojo_bot.rb
+% bundle exec ruby bin/kanojo_bot
 ```
 
 ## how to add word?
