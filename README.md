@@ -1,10 +1,8 @@
-# kanojo bot.
+# kanojo bot. [![Code Climate](https://codeclimate.com/github/sugamasao/kanojo_bot.png)](https://codeclimate.com/github/sugamasao/kanojo_bot) [![Build Status](https://travis-ci.org/sugamasao/kanojo_bot.png?branch=master)](https://travis-ci.org/sugamasao/kanojo_bot)
 
 [@sugyan_knj_bot](https://twitter.com/sugyan_knj_bot) loves @sugyan
 
 inspired by [genki-bot](https://github.com/sugyan/genki-bot)
-
-[![Code Climate](https://codeclimate.com/github/sugamasao/kanojo_bot.png)](https://codeclimate.com/github/sugamasao/kanojo_bot) [![Build Status](https://travis-ci.org/sugamasao/kanojo_bot.png?branch=master)](https://travis-ci.org/sugamasao/kanojo_bot)
 ----
 
 ## how to use
