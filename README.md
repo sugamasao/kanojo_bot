@@ -4,6 +4,8 @@
 
 inspired by [genki-bot](https://github.com/sugyan/genki-bot)
 
+[![Code Climate](https://codeclimate.com/github/sugamasao/kanojo_bot.png)](https://codeclimate.com/github/sugamasao/kanojo_bot)
+
 ----
 
 ## how to use
