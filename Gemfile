@@ -7,6 +7,8 @@ gem 'git-revision'
 gem 'rake'
 
 
-group :test do
+group :development, :test do
   gem 'rspec'
+  gem 'yard'
+  gem 'redcarpet'
 end
