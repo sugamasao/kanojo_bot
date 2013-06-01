@@ -4,3 +4,7 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 gem 'tweetstream'
 gem 'git-revision'
+
+group :test do
+  gem 'rspec'
+end

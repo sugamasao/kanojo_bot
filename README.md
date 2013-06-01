@@ -31,3 +31,8 @@ editting for yaml.
 - [add match word and response variation](data/samishisou.yaml) （すぎゃーんの言葉に反応するリアクション）
 - [add end word variation](data/hagemashitai.yaml) （レスポンスの最後にランダムで追加する文字列）
 - [add face variation](data/face.yaml) （使用する顔文字）
+
+## Heroku to Deploy
+```sh
+heroku config:set BUNDLE_WITHOUT="development:test"
+```
