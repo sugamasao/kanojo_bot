@@ -25,6 +25,7 @@ GEM
     multi_json (1.7.2)
     multipart-post (1.2.0)
     rake (10.0.4)
+    redcarpet (2.2.2)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -45,6 +46,7 @@ GEM
       multi_json (~> 1.0)
       simple_oauth (~> 0.2)
     yajl-ruby (1.1.0)
+    yard (0.8.6.1)
 
 PLATFORMS
   ruby
@@ -52,5 +54,7 @@ PLATFORMS
 DEPENDENCIES
   git-revision
   rake
+  redcarpet
   rspec
   tweetstream
+  yard
