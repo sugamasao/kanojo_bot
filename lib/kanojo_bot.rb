@@ -21,15 +21,20 @@ class KanojoBot
   def run
     @logger.debug 'run!'
     @twitter.userstream do |status|
-      @logger.debug(status)
-      next if @twitter.exclude_tweet?(status)
+      begin
+        @logger.info(status)
+        next if @twitter.exclude_tweet?(status)
 
-      daisukidayo = @processor.call_to_user(status.from_user, status.text)
+        daisukidayo = @processor.call_to_user(status.from_user, status.text)
 
-      next if daisukidayo.nil?
+        next if daisukidayo.nil?
 
-      @logger.info("tweeted: #{daisukidayo}")
-      @twitter.tweet_update(daisukidayo, status.id)
+        @logger.info("tweeted: #{daisukidayo}")
+        @twitter.tweet_update(daisukidayo, status.id)
+      rescue => e
+        @logger.error("message = #{e.message}/class = #{e.class}")
+        @logger.error(e.backtrace)
+      end
     end
   end
 
