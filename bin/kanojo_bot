@@ -4,4 +4,6 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'kanojo_bot'
 
-KanojoBot.daisuki
+debug = ARGV.any? {|arg| %w(-d --debug).include?(arg) }
+
+KanojoBot.daisuki(debug)
