@@ -7,40 +7,42 @@ require_relative 'twitter_wrapper'
 
 class KanojoBot
 
-  def initialize
+  def initialize(debug)
     STDOUT.sync = true
 
+    @debug     = debug
     @logger    = Logger.new(STDOUT)
-    @twitter   = TwitterWrapper.new(@logger)
+    @twitter   = TwitterWrapper.new(@logger, @debug)
     @processor = TextProcessor.new
-
-    @twitter.tweet_update(@processor.wakeup_message(Time.now))
   end
 
   # running kanojo!
   def run
-    @logger.debug 'run!'
-    @twitter.userstream do |status|
-      begin
-        @logger.info(status)
+    @logger.info 'wakeup!'
+    @twitter.tweet_update(@processor.wakeup_message(Time.now))
+
+    @logger.info '[stream] start!'
+    begin
+      @twitter.userstream do |status|
+        @logger.debug("[stream] status: #{status}") if @debug
+
         next if @twitter.exclude_tweet?(status)
 
         daisukidayo = @processor.call_to_user(status.from_user, status.text)
 
         next if daisukidayo.nil?
 
-        @logger.info("tweeted: #{daisukidayo}")
+        @logger.info("[stream] daisukidayo: #{daisukidayo}")
         @twitter.tweet_update(daisukidayo, status.id)
-      rescue => e
-        @logger.error("message = #{e.message}/class = #{e.class}")
-        @logger.error(e.backtrace)
       end
+    rescue => e
+      @logger.error("[stream] message=#{e.message}, class=#{e.class}, backtrace=#{e.backtrace}")
+      retry
     end
   end
 
-  def self.daisuki
-    self.new.run
+  def self.daisuki(debug = false)
+    self.new(debug).run
   end
 end
-
 

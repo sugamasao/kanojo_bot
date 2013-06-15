@@ -6,7 +6,8 @@ class TwitterWrapper
   attr_reader :client, :stream
 
   # @param [Logger] logger logger instance
-  def initialize(logger)
+  def initialize(logger, debug = false)
+    @debug  = debug
     @logger = logger
     @client = Twitter::Client.new(
       consumer_key:       ENV['TWITTER_CONSUMER_KEY'],
@@ -27,11 +28,11 @@ class TwitterWrapper
     @stream = TweetStream::Client.new
 
     @stream.on_error do |e|
-      @logger.error(e)
+      @logger.error("[client] #{e}")
     end
 
     @stream.on_inited do
-      @logger.info('client init')
+      @logger.info("[client] inited")
     end
   end
 
@@ -52,7 +53,11 @@ class TwitterWrapper
   def tweet_update(daisukidayo, id = nil)
     option = {}
     option[:in_reply_to_status_id] = id if id
-    @client.update(daisukidayo, option)
+    if @debug
+      @logger.debug("[client] Tweeted:#{daisukidayo}, Option:#{option}")
+    else
+      @client.update(daisukidayo, option)
+    end
   end
 
   # exclude tweet

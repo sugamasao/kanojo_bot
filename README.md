@@ -5,9 +5,14 @@
 inspired by [genki-bot](https://github.com/sugyan/genki-bot)
 ----
 
-## how to use
+## how to use(local)
 
-get access token.
+### get self access token
+
+- [dev.twitter.com](https://dev.twitter.com)
+- Accesse Level : Read and write
+
+### set env
 
 ```sh
 export TWITTER_CONSUMER_KEY=your key
@@ -16,12 +21,14 @@ export TWITTER_ACCESS_TOKEN=your token
 export TWITTER_ACCESS_TOKEN_SECRET=your token secret
 ```
 
-execute KanojoBot.daisuki
+### execute KanojoBot.daisuki
 
 ```sh
 % bundle install
-% bundle exec ruby bin/kanojo_bot
+% bundle exec ruby bin/kanojo_bot -d
 ```
+
+WARNING: not use `-d` is really post(You will want to Bitch).
 
 ## how to add word?
 
@@ -35,3 +42,4 @@ editting for yaml.
 ```sh
 heroku config:set BUNDLE_WITHOUT="development:test"
 ```
+
