@@ -2,20 +2,25 @@ require 'spec_helper'
 require 'yaml'
 
 describe 'YAML format' do
-  let(:dir) { File.expand_path('../../../data', __FILE__) }
-  let(:face)         { File.join(dir, 'face.yaml') }
-  let(:hagemashitai) { File.join(dir, 'hagemashitai.yaml') }
+  let(:dir)  { File.expand_path('../../../data', __FILE__) }
   let(:samishisou)   { File.join(dir, 'samishisou.yaml') }
 
-  it 'face.yaml' do
-    expect { YAML.load(File.read(face)) }.to_not raise_error
+  shared_examples_for 'value is String instance' do |name|
+    let(:dir)  { File.expand_path('../../../data', __FILE__) }
+    let(:data) { File.join(dir, name) }
+
+    it { YAML.load(File.read(data)).each {|f| expect(f).to be_an_instance_of(String) } }
   end
 
-  it 'hagemashitai.yaml' do
-    expect { YAML.load(File.read(hagemashitai)) }.to_not raise_error
+  describe 'face.yaml' do
+    it_should_behave_like 'value is String instance', 'face.yaml'
   end
 
-  it 'samishisou.yaml' do
-    expect { YAML.load(File.read(samishisou)) }.to_not raise_error
+  describe 'hagemashitai.yaml' do
+    it_should_behave_like 'value is String instance', 'hagemashitai.yaml'
+  end
+
+  describe 'samishisou.yaml' do
+    it { expect { YAML.load(File.read(samishisou)) }.to_not raise_error }
   end
 end
