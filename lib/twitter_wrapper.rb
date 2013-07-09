@@ -36,8 +36,8 @@ class TwitterWrapper
     end
   end
 
-  def userstream
-    @stream.userstream
+  def userstream(&block)
+    @stream.userstream(&block)
   end
 
   # user id is me?
