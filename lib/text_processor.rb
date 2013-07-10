@@ -46,6 +46,8 @@ class TextProcessor
         return match_word["response"] if text =~ /#{word}/
       end
     end
+
+    nil
   end
 
   # Hagemashi no message
