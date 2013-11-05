@@ -13,6 +13,7 @@ class TextProcessor
     @face         = YAML.load(DATA_DIR.join('face.yaml').read)
     @hagemashitai = YAML.load(DATA_DIR.join('hagemashitai.yaml').read)
     @samishisou   = YAML.load(DATA_DIR.join('samishisou.yaml').read)
+    @event        = YAML.load(DATA_DIR.join('event.yaml').read)
   end
 
   # Wakeup kanojo_bot message.
@@ -60,5 +61,13 @@ class TextProcessor
   # @return [Strgin]
   def face
     @face.sample
+  end
+
+  def has_event?(date)
+    @event.key?(date)
+  end
+
+  def event_message(date)
+    @event[date]
   end
 end

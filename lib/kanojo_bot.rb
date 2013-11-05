@@ -1,5 +1,6 @@
 # coding: utf-8
 
+require 'date'
 require 'logger'
 
 require_relative 'text_processor'
@@ -20,6 +21,7 @@ class KanojoBot
   def run
     @logger.info 'wakeup!'
     @twitter.tweet_update(@processor.wakeup_message(Time.now))
+    @twitter.tweet_update(@processor.event_message(Date.today)) if @processor.has_event?(Date.today)
 
     @logger.info '[stream] start!'
     begin
