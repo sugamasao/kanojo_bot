@@ -29,6 +29,7 @@ class KanojoBot
         @logger.debug("[stream] status: #{status}") if @debug
 
         next if @twitter.exclude_tweet?(status)
+        next if ignore?
 
         daisukidayo = @processor.call_to_user(status.from_user, status.text)
 
@@ -41,6 +42,11 @@ class KanojoBot
       @logger.error("[stream] message=#{e.message}, class=#{e.class}, backtrace=#{e.backtrace}")
       retry
     end
+  end
+
+  # ツイートに反応するのは3回に1回ていど
+  def ignore?
+    rand(3) == 0
   end
 
   def self.daisuki(debug = false)
