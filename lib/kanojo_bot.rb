@@ -46,7 +46,7 @@ class KanojoBot
 
   # ツイートに反応するのは3回に1回ていど
   def ignore?
-    rand(3) == 0
+    rand(3) != 0
   end
 
   def self.daisuki(debug = false)
