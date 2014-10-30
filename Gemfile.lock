@@ -75,4 +75,5 @@ DEPENDENCIES
   redcarpet
   rspec
   tweetstream
+  twitter
   yard
