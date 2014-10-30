@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'tweetstream'
+require 'twitter'
 
 class TwitterWrapper
   attr_reader :client, :stream
@@ -9,7 +10,7 @@ class TwitterWrapper
   def initialize(logger, debug = false)
     @debug  = debug
     @logger = logger
-    @client = Twitter::Client.new(
+    @client = Twitter::REST::Client.new(
       consumer_key:       ENV['TWITTER_CONSUMER_KEY'],
       consumer_secret:    ENV['TWITTER_CONSUMER_SECRET'],
       oauth_token:        ENV['TWITTER_ACCESS_TOKEN'],
