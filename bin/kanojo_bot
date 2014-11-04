@@ -6,8 +6,8 @@ begin
   require 'dotenv'
   require 'pry'
   Dotenv.load
-rescue => e
-puts "not require"
+rescue LoadError
+  puts "not require"
 end
 
 lib = File.expand_path('../../lib', __FILE__)
