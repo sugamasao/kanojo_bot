@@ -21,6 +21,15 @@ export TWITTER_ACCESS_TOKEN=your token
 export TWITTER_ACCESS_TOKEN_SECRET=your token secret
 ```
 
+or `vi .env` (using dotenv)
+
+```sh
+TWITTER_CONSUMER_KEY=your key
+TWITTER_CONSUMER_SECRET=your secret
+TWITTER_ACCESS_TOKEN=your token
+TWITTER_ACCESS_TOKEN_SECRET=your token secret
+```
+
 ### execute KanojoBot.daisuki
 
 ```sh

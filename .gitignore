@@ -1,6 +1,7 @@
 .DS_Store
 
 .rspec
+.env
 
 # YARD artifacts
 .yardoc
