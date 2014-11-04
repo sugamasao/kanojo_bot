@@ -8,7 +8,7 @@ gem 'rake'
 
 group :development, :test do
   gem 'dotenv'
-  gem 'rspec'
+  gem 'rspec', require: 'rspec/core/rake_task'
   gem 'yard'
   gem 'redcarpet'
   gem 'pry'
