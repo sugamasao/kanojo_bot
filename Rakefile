@@ -1,11 +1,9 @@
 begin
-  # only development or test
-  require 'rspec/core/rake_task'
-  require 'yard'
+  Bundler.require(:default, :development, :test)
 
   task default: :spec
 
   RSpec::Core::RakeTask.new
   YARD::Rake::YardocTask.new
-rescue => e
+rescue LoadError
 end
