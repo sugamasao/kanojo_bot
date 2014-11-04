@@ -3,9 +3,11 @@ GEM
   specs:
     addressable (2.3.6)
     buftok (0.2.0)
+    coderay (1.1.0)
     cookiejar (0.3.2)
     daemons (1.1.9)
     diff-lcs (1.2.5)
+    dotenv (1.0.2)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -14,7 +16,7 @@ GEM
       http_parser.rb (>= 0.6.0)
     em-socksify (0.3.0)
       eventmachine (>= 1.0.0.beta.4)
-    em-twitter (0.3.3)
+    em-twitter (0.3.5)
       buftok (~> 0.2)
       eventmachine (~> 1.0)
       http_parser.rb (~> 0.6)
@@ -29,9 +31,14 @@ GEM
     json (1.8.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    method_source (0.8.2)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     naught (1.0.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rake (10.3.2)
     redcarpet (3.2.0)
     rspec (3.1.0)
@@ -47,6 +54,7 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
     simple_oauth (0.3.0)
+    slop (3.6.0)
     thread_safe (0.3.4)
     tweetstream (2.6.1)
       daemons (~> 1.1)
@@ -71,6 +79,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
+  em-twitter (~> 0.3.5)
+  pry
   rake
   redcarpet
   rspec

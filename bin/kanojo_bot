@@ -1,4 +1,15 @@
 # coding: utf-8
+
+Bundler.require(:default, :development)
+begin
+  # using development
+  require 'dotenv'
+  require 'pry'
+  Dotenv.load
+rescue => e
+puts "not require"
+end
+
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
