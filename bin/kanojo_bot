@@ -1,6 +1,6 @@
 # coding: utf-8
 
-Bundler.require(:default, :development)
+Bundler.require(:default)
 begin
   # using development
   require 'dotenv'
