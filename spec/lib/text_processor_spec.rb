@@ -4,7 +4,7 @@ require 'text_processor'
 
 describe TextProcessor do
   let(:processor) { TextProcessor.new }
-  let(:birthday) { Date.new(2013,12,10) }
+  let(:birthday) { Date.new(2013, 12, 10) }
 
   describe "#has_event?" do
     it { expect(processor).to have_event(birthday) }
