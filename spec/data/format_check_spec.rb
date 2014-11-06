@@ -9,7 +9,7 @@ describe 'YAML format' do
     let(:dir)  { File.expand_path('../../../data', __FILE__) }
     let(:data) { File.join(dir, name) }
 
-    it { YAML.load(File.read(data)).each {|f| expect(f).to be_an_instance_of(String) } }
+    it { YAML.load(File.read(data)).each { |f| expect(f).to be_an_instance_of(String) } }
   end
 
   describe 'face.yaml' do
