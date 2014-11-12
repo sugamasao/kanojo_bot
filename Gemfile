@@ -13,4 +13,5 @@ group :development, :test do
   gem 'yard'
   gem 'redcarpet'
   gem 'pry'
+  gem 'codeclimate-test-reporter', '~> 0.4'
 end

@@ -1,4 +1,8 @@
-# kanojo bot. [![Code Climate](https://codeclimate.com/github/sugamasao/kanojo_bot.png)](https://codeclimate.com/github/sugamasao/kanojo_bot) [![Build Status](https://travis-ci.org/sugamasao/kanojo_bot.png?branch=master)](https://travis-ci.org/sugamasao/kanojo_bot)
+# kanojo bot.
+
+[![Build Status](https://travis-ci.org/sugamasao/kanojo_bot.png?branch=master)](https://travis-ci.org/sugamasao/kanojo_bot)
+[![Code Climate](https://codeclimate.com/github/sugamasao/kanojo_bot.png)](https://codeclimate.com/github/sugamasao/kanojo_bot)
+[![Test Coverage](https://codeclimate.com/github/sugamasao/kanojo_bot/badges/coverage.svg)](https://codeclimate.com/github/sugamasao/kanojo_bot)
 
 [@sugyan_knj_bot](https://twitter.com/sugyan_knj_bot) loves @sugyan
 
