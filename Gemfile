@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.1.5'
 gem 'tweetstream'
 gem 'em-twitter', '~> 0.3.5'
 gem 'twitter'
