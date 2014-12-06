@@ -68,6 +68,6 @@ class TwitterWrapper
     return true if me?(status[:user][:id])
     return true if status.retweet?
     return true if status.reply?
-    return false
+    false
   end
 end
