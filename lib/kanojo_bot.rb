@@ -7,7 +7,6 @@ require_relative 'text_processor'
 require_relative 'twitter_wrapper'
 
 class KanojoBot
-
   def initialize(debug)
     STDOUT.sync = true
 

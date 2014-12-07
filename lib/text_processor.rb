@@ -4,7 +4,6 @@ require 'pathname'
 require 'yaml'
 
 class TextProcessor
-
   # data directory
   DATA_DIR = Pathname.new(__FILE__).dirname.parent.join('data')
 
