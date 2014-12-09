@@ -34,7 +34,7 @@ class TwitterWrapper
     end
 
     @stream.on_inited do
-      @logger.info("[client] inited")
+      @logger.info('[client] inited')
     end
   end
 

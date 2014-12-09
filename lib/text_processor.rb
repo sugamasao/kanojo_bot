@@ -42,8 +42,8 @@ class TextProcessor
   # @return [nil] not reply
   def samishisou(text)
     @samishisou.each do |match_word|
-      match_word["word"].each do |word|
-        return match_word["response"] if text =~ /#{word}/
+      match_word['word'].each do |word|
+        return match_word['response'] if text =~ /#{word}/
       end
     end
 
