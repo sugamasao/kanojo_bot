@@ -50,7 +50,7 @@ class TwitterWrapper
   end
 
   # tweet update! say daisuki
-  # @param [String] daisukidayo daisuki message 
+  # @param [String] daisukidayo daisuki message
   # @param [Fixnum] id reply user id
   def tweet_update(daisukidayo, id = nil)
     option = {}

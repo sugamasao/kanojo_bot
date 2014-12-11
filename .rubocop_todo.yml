@@ -50,8 +50,3 @@ Style/RedundantSelf:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/TrailingBlankLines:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Enabled: false
