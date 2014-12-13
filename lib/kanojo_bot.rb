@@ -52,4 +52,3 @@ class KanojoBot
     self.new(debug).run
   end
 end
-
