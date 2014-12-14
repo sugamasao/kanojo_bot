@@ -49,6 +49,6 @@ class KanojoBot
   end
 
   def self.daisuki(debug = false)
-    self.new(debug).run
+    new(debug).run
   end
 end
