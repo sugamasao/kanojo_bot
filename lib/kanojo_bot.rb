@@ -31,21 +31,21 @@ class KanojoBot
         next if @twitter.exclude_tweet?(status)
         next if gaman?
 
-        daisukidayo = nil
-        if rand(2) == 0
+        ohenji = nil
+        if status.reply? || (rand(2) == 0)
           @logger.debug('[stream] use Zatsudan API')
-          daisukidayo = ZatsudanProcessor.new.create(status.text)
+          ohenji = ZatsudanProcessor.new.create(status.text)
         else
           @logger.debug('[stream] use text processor')
-          daisukidayo = @processor.create(status.text)
+          ohenji = @processor.create(status.text)
         end
 
-        next if daisukidayo.nil?
+        next if ohenji.nil?
 
-        daisukidayo = "@#{status.user.screen_name} #{ daisukidayo }"
+        ohenji = "@#{status.user.screen_name} #{ ohenji }"
 
-        @logger.info("[stream] daisukidayo: #{daisukidayo}")
-        @twitter.tweet_update(daisukidayo, status.id)
+        @logger.info("[stream] ohenji: #{ohenji}")
+        @twitter.tweet_update(ohenji, status.id)
       end
     rescue => e
       @logger.error("[stream] message=#{e.message}, class=#{e.class}, backtrace=#{e.backtrace}")
