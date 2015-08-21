@@ -29,16 +29,21 @@ class KanojoBot
         @logger.debug("[stream] status: #{status.text}") if @debug
 
         next if @twitter.exclude_tweet?(status)
-        next if gaman?
 
-        ohenji = if status.reply? || (rand(2) == 0)
-          @logger.debug('[stream] use Zatsudan API')
+        ohenji = if status.reply?
+          @logger.debug('[stream] use Zatsudan API(reply)')
           ZatsudanProcessor.new.create(status.text)
         else
-          @logger.debug('[stream] use text processor')
-          @processor.create(status.text)
+          next if gaman?
+          if rand(2) == 0
+            @logger.debug('[stream] use Zatsudan API')
+            ZatsudanProcessor.new.create(status.text)
+          else
+            @logger.debug('[stream] use text processor')
+            @processor.create(status.text)
+          end
         end
-
+        
         unless ohenji
           @logger.info('[stream] ohenji is nil.')
           next
