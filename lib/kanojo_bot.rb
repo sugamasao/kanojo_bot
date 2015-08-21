@@ -4,6 +4,7 @@ require 'date'
 require 'logger'
 
 require_relative 'text_processor'
+require_relative 'zatsudan_processor'
 require_relative 'twitter_wrapper'
 
 class KanojoBot
@@ -30,9 +31,18 @@ class KanojoBot
         next if @twitter.exclude_tweet?(status)
         next if gaman?
 
-        daisukidayo = @processor.call_to_user(status.user.screen_name, status.text)
+        daisukidayo = nil
+        if rand(2) == 0
+          @logger.debug('[stream] use Zatsudan API')
+          daisukidayo = ZatsudanProcessor.new.create(status.text)
+        else
+          @logger.debug('[stream] use text processor')
+          daisukidayo = @processor.create(status.text)
+        end
 
         next if daisukidayo.nil?
+
+        daisukidayo = "@#{status.user.screen_name} #{ daisukidayo }"
 
         @logger.info("[stream] daisukidayo: #{daisukidayo}")
         @twitter.tweet_update(daisukidayo, status.id)

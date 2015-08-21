@@ -25,15 +25,14 @@ class TextProcessor
   end
 
   # Call to user for message
-  # @param [String] user_name tweet for @user_name
   # @param [String] text original message
   # @return [String] message
   # @return [nil] not to do.
-  def call_to_user(user_name, text)
+  def create(text)
     samishisou = samishisou(text)
     return nil if samishisou.nil?
 
-    "@#{user_name} #{samishisou}#{hagemashitai} #{face}"
+    "#{samishisou}#{hagemashitai} #{face}"
   end
 
   # Samishisou?

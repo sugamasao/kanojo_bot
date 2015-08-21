@@ -5,6 +5,7 @@ gem 'tweetstream'
 gem 'em-twitter', '~> 0.3.5'
 gem 'twitter'
 gem 'rake'
+gem 'docomoru'
 
 group :development, :test do
   gem 'dotenv'
