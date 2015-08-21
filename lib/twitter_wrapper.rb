@@ -65,7 +65,7 @@ class TwitterWrapper
   # exclude tweet
   # @return [Boolean] true is exclude status
   def exclude_tweet?(status)
-    return true if me?(status[:user][:id])
+    return true if me?(status.user.id)
     return true if status.retweet?
     return true if status.reply?
     false

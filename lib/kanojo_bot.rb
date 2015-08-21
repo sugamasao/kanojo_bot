@@ -25,12 +25,12 @@ class KanojoBot
     @logger.info '[stream] start!'
     begin
       @twitter.userstream do |status|
-        @logger.debug("[stream] status: #{status}") if @debug
+        @logger.debug("[stream] status: #{status.text}") if @debug
 
         next if @twitter.exclude_tweet?(status)
         next if gaman?
 
-        daisukidayo = @processor.call_to_user(status.from_user, status.text)
+        daisukidayo = @processor.call_to_user(status.user.screen_name, status.text)
 
         next if daisukidayo.nil?
 
