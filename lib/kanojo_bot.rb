@@ -39,7 +39,10 @@ class KanojoBot
           @processor.create(status.text)
         end
 
-        next unless ohenji
+        unless ohenji
+          @logger.info('[stream] ohenji is nil.')
+          next
+        end
 
         ohenji = "@#{ status.user.screen_name } #{ ohenji }"
 
