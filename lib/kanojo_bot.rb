@@ -31,18 +31,17 @@ class KanojoBot
         next if @twitter.exclude_tweet?(status)
         next if gaman?
 
-        ohenji = nil
-        if status.reply? || (rand(2) == 0)
+        ohenji = if status.reply? || (rand(2) == 0)
           @logger.debug('[stream] use Zatsudan API')
-          ohenji = ZatsudanProcessor.new.create(status.text)
+          ZatsudanProcessor.new.create(status.text)
         else
           @logger.debug('[stream] use text processor')
-          ohenji = @processor.create(status.text)
+          @processor.create(status.text)
         end
 
-        next if ohenji.nil?
+        next unless ohenji
 
-        ohenji = "@#{status.user.screen_name} #{ ohenji }"
+        ohenji = "@#{ status.user.screen_name } #{ ohenji }"
 
         @logger.info("[stream] ohenji: #{ohenji}")
         @twitter.tweet_update(ohenji, status.id)
