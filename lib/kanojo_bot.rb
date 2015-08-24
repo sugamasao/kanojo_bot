@@ -4,6 +4,7 @@ require 'date'
 require 'logger'
 
 require_relative 'text_processor'
+require_relative 'zatsudan_processor'
 require_relative 'twitter_wrapper'
 
 class KanojoBot
@@ -25,17 +26,33 @@ class KanojoBot
     @logger.info '[stream] start!'
     begin
       @twitter.userstream do |status|
-        @logger.debug("[stream] status: #{status}") if @debug
+        @logger.debug("[stream] status: #{status.text}") if @debug
 
         next if @twitter.exclude_tweet?(status)
-        next if gaman?
 
-        daisukidayo = @processor.call_to_user(status.from_user, status.text)
+        ohenji = if status.reply?
+          @logger.debug('[stream] use Zatsudan API(reply)')
+          ZatsudanProcessor.new.create(status.text)
+        else
+          next if gaman?
+          if rand(2) == 0
+            @logger.debug('[stream] use Zatsudan API')
+            ZatsudanProcessor.new.create(status.text)
+          else
+            @logger.debug('[stream] use text processor')
+            @processor.create(status.text)
+          end
+        end
+        
+        unless ohenji
+          @logger.info('[stream] ohenji is nil.')
+          next
+        end
 
-        next if daisukidayo.nil?
+        ohenji = "@#{ status.user.screen_name } #{ ohenji }"
 
-        @logger.info("[stream] daisukidayo: #{daisukidayo}")
-        @twitter.tweet_update(daisukidayo, status.id)
+        @logger.info("[stream] ohenji: #{ohenji}")
+        @twitter.tweet_update(ohenji, status.id)
       end
     rescue => e
       @logger.error("[stream] message=#{e.message}, class=#{e.class}, backtrace=#{e.backtrace}")

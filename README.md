@@ -15,8 +15,9 @@ inspired by [genki-bot](https://github.com/sugyan/genki-bot)
 ### get self access token
 
 - [dev.twitter.com](https://dev.twitter.com)
-- Accesse Level : Read and write
-
+  - Accesse Level : Read and write
+- [docomo Developersupport](https://dev.smt.docomo.ne.jp/)
+  - use `雑談対話` key
 ### set env
 
 ```sh
@@ -24,6 +25,7 @@ export TWITTER_CONSUMER_KEY=your key
 export TWITTER_CONSUMER_SECRET=your secret
 export TWITTER_ACCESS_TOKEN=your token
 export TWITTER_ACCESS_TOKEN_SECRET=your token secret
+export DOCOMO_API_KEY=your API key
 ```
 
 or `vi .env` (using dotenv)
@@ -33,6 +35,7 @@ TWITTER_CONSUMER_KEY=your key
 TWITTER_CONSUMER_SECRET=your secret
 TWITTER_ACCESS_TOKEN=your token
 TWITTER_ACCESS_TOKEN_SECRET=your token secret
+DOCOMO_API_KEY=your API key
 ```
 
 ### execute KanojoBot.daisuki
@@ -56,4 +59,3 @@ editting for yaml.
 ```sh
 heroku config:set BUNDLE_WITHOUT="development:test"
 ```
-
