@@ -43,7 +43,7 @@ class KanojoBot
             @processor.create(status.text)
           end
         end
-        
+
         unless ohenji
           @logger.info('[stream] ohenji is nil.')
           next
@@ -51,6 +51,7 @@ class KanojoBot
 
         ohenji = "@#{ status.user.screen_name } #{ ohenji }"
 
+        sleep 5 # 一呼吸おいてからリプライ返す
         @logger.info("[stream] ohenji: #{ohenji}")
         @twitter.tweet_update(ohenji, status.id)
       end
