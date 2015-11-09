@@ -61,9 +61,9 @@ class KanojoBot
     end
   end
 
-  # 2/3くらいのツイートは我慢する
+  # 9/10くらいのツイートは我慢する
   def gaman?
-    rand(3) != 0
+    rand(10) != 0
   end
 
   def self.daisuki(debug = false)
